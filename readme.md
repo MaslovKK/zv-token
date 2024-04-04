@@ -42,3 +42,6 @@ console.log(data)
 //    }
 // }
 ```
+
+### Goida
+![2024-04-0405 50 22-ezgif com-optimize](https://github.com/zoto-ff/zv-token/assets/142039751/8937d186-0eb1-419c-97bb-7aae319e6a69)
