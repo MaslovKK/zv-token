@@ -5,3 +5,9 @@ interface Payload<T = any> {
     created?: Date
     expires?: Date
 }
+
+interface ZVTokenOptions {
+    secret: string
+    structures?: string[]
+    throwErrors?: boolean
+}
