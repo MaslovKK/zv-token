@@ -11,8 +11,7 @@ describe('zv-token', () => {
 
     const payload: Payload = {
         user_id: 123,
-        session_id: 123,
-        created_at: new Date
+        session_id: 123
     }
 
     it('should make token', () => {
@@ -28,6 +27,6 @@ describe('zv-token', () => {
 
     it('should get correct payload', () => {
         expect(gotPayload.user_id).toBe(payload.user_id)
-        expect(+gotPayload.created_at! - +payload.created_at!).toBe(0)
+        expect(+gotPayload.created! - +payload.created!).toBe(0)
     })
 })

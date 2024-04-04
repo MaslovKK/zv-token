@@ -3,30 +3,32 @@ import { Packr } from 'msgpackr'
 interface ZVTokenOptions {
     secret: string
     structures?: string[]
-    throwError?: boolean
+    throwErrors?: boolean
 }
 
 class ZVToken {
     packr
     hasher
     secret
-    throwError
+    throwErrors
 
     constructor (opts: ZVTokenOptions) {
         this.secret = opts.secret
-        this.throwError = opts.throwError || false
+        this.throwErrors = opts.throwErrors || false
         this.hasher = new Bun.CryptoHasher('sha256')
 
         this.packr = new Packr({
             structures: [[
-                'user_id', 'session_id', 'created_at', 'expires_at', 'data',
+                'user_id', 'session_id', 'created', 'expires', 'data',
                 ...(opts.structures || [])
             ]]
         })
     }
 
     sign<T> (payload: Payload<T>) {
-        const p = this.packr.pack(payload).toString('base64')
+        payload.created ??= new Date
+        const p = this.packr.pack(payload)
+            .toString('base64')
 
         this.hasher.update(p + this.secret)
         const sign = this.hasher.digest('base64')
@@ -38,7 +40,7 @@ class ZVToken {
     }
 
     error (msg: string) {
-        if (this.throwError) throw new Error(msg)
+        if (this.throwErrors) throw new Error(msg)
         return { status: false, payload: undefined }
     }
 
@@ -55,7 +57,7 @@ class ZVToken {
         }
 
         const payload = this.packr.unpack(Buffer.from(p, 'base64')) as Payload<T>
-        if (payload.expires_at && +new Date - +payload.expires_at > 0) {
+        if (payload.expires && +new Date - +payload.expires > 0) {
             return this.error('session expired')
         }
 

@@ -2,6 +2,7 @@
   "name": "zv-token",
   "version": "0.1.0",
   "module": "src/index.ts",
+  "keywords": ["jwt", "web token"],
   "type": "module",
   "scripts": {
     "test": "bun test"
