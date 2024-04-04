@@ -1,11 +1,5 @@
 import { Packr } from 'msgpackr'
 
-interface ZVTokenOptions {
-    secret: string
-    structures?: string[]
-    throwErrors?: boolean
-}
-
 class ZVToken {
     packr
     hasher
