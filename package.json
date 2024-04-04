@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "module": "src/index.ts",
   "keywords": ["jwt", "web token"],
+  "homepage": "https://github.com/zoto-ff/zv-token",
   "type": "module",
   "scripts": {
     "test": "bun test"
