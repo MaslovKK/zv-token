@@ -1,0 +1,8 @@
+bun.lockb
+package-lock.json
+node_modules/
+.npm
+.env
+dist
+.idea
+.DS_Store
